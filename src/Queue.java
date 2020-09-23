@@ -27,6 +27,10 @@ public class Queue {
     }
 
     public RubberDuck getFirst() {
+        if(internalArrayList.size() == 0) {
+            return null;
+        }
+
         return internalArrayList.get(0);
     }
 
@@ -39,6 +43,14 @@ public class Queue {
         internalArrayList.remove(rubberDuckToReturn);
 
         return rubberDuckToReturn;
+    }
+
+    public void reduceSize(int amount) {
+        if(internalArrayList.size() != 0) {
+            for(int i = 0; i < amount; i++) {
+                internalArrayList.remove(internalArrayList.size() - 1);
+            }
+        }
     }
 
     @Override
