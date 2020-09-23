@@ -11,6 +11,6 @@ public class RubberDuck {
 
     @Override
     public String toString() {
-        return "Rubber Duck[" + uniqueNumber + "]";
+        return "Rubber Duck [" + uniqueNumber + "]";
     }
 }

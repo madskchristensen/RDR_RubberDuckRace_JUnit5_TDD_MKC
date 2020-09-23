@@ -43,16 +43,28 @@ public class Race {
     public void play() {
         init();
 
-        while(timestep <= maxRounds) {
-                printState();
+        while(timestep < maxRounds) {
+            garbageCollectQueues();
 
+            printState();
+
+            if (queueMap.size() > 1) {
                 moveRandomDuckBetween2RandomQueues();
                 removeRandomQueue();
-                reduceQueueSize(1);
+            }
+            reduceQueueSize(1);
 
-                timestep++;
+            timestep++;
                 n--;
         }
+
+        garbageCollectQueues();
+
+        printState();
+        printWinner();
+
+        timestep++;
+        n--;
     }
 
     private void moveRandomDuckBetween2RandomQueues() {
@@ -60,10 +72,6 @@ public class Race {
         int queueToMoveDuckTo = getRandomQueueKey();
 
         queueMap.get(queueToMoveDuckTo).addToEnd(queueMap.get(queueToMoveDuckFrom).moveFirst());
-
-        if(queueMap.get(queueToMoveDuckFrom).size() == 0) {
-            queueMap.remove(queueToMoveDuckFrom);
-        }
     }
 
     private void printState() {
@@ -73,8 +81,19 @@ public class Race {
         for(Map.Entry<Integer, Queue> entry : queueMap.entrySet()) {
             System.out.println("Queue number " + entry.getKey() + ": " + entry.getValue());
         }
+    }
 
-        System.out.println("Queue Map Size: " + queueMap.size());
+    private void printWinner() {
+        RubberDuck winner = queueMap.get(getRandomQueueKey()).getFirst();
+
+        if(winner == null) {
+            System.out.println("\nNobody is the winner :-(");
+        } else {
+            System.out.println("\nWINNER IS " + winner + "!");
+            System.out.println("\nCONGRATULATIONS");
+            System.out.println("CONGRATULATIONS");
+            System.out.println("CONGRATULATIONS");
+        }
     }
 
     /*
@@ -98,6 +117,16 @@ public class Race {
     private void reduceQueueSize(int amount) {
         for(Map.Entry<Integer, Queue> entry : queueMap.entrySet()) {
             entry.getValue().reduceSize(1);
+        }
+    }
+
+    private void garbageCollectQueues() {
+        for(int i = 0; i < availableQueues.size(); i++) {
+            int queueKey = availableQueues.get(i);
+
+            if(queueMap.get(queueKey).size() == 0) {
+                queueMap.remove(queueKey);
+            }
         }
     }
 }
