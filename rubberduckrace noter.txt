@@ -1,0 +1,61 @@
+N Queues
+N Unique Numbered Rubber Ducks
+Time step 1, 2 ...
+
+
+10 queues of 10 ducks = 100 unique numbered ducks in the race
+
+
+For each time step
+----
+1. Draw number between 1 - N
+   Move foremost rubber duck from that queue to new queue with help of another new random number
+
+2. One less queue, with 1 less room
+
+
+SIMULATION
+
+-- Time Step 1
+10 Queues with 10 ducks each
+= 100 ducks total
+
+First random between 1 - N (10) = 7
+Second random between 1 - N (10) = 3
+getForemostRubberDuckFromQueue7 -> addRubberDuckToEndOfQueue3
+
+-- Time Step 2
+9 Queues with 9 ducks each
+= 81 ducks total
+
+-- Time Step 3
+8 Queues with 8 ducks each
+= 64 ducks total
+
+-- Time step 4
+7 Queues with 7 ducks each
+= 49 ducks total
+
+-- Time step 5
+6 queues with 6 ducks each
+= 36 ducks total
+
+-- Time step 6
+5 queues with 5 ducks each
+= 25 ducks total
+
+- Time step 7
+4 queues with 4 ducks each
+= 16 ducks total
+
+-- Time step 8
+3 Queues with 3 ducks each
+=  9 ducks total
+
+-- Time step 9
+2 Queues with 2 ducks each
+= 4 ducks total
+
+-- Time step 10
+1 Queue with 1 duck
+= 1 duck total (WINNER)
